@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var ProfileExperienceService_1 = require("../services/ProfileExperienceService");
+var router = express_1["default"].Router();
+router.get("/:profileSlug/experiences", ProfileExperienceService_1.findProfileExperiences);
+router.get("/:profileSlug/experiences/:experienceSlug", ProfileExperienceService_1.findProfileExperience);
+router.post("/:profileSlug/experiences", ProfileExperienceService_1.createProfileExperience);
+router.put("/:profileSlug/experiences/:experienceSlug", ProfileExperienceService_1.updateProfileExperience);
+router["delete"]("/:profileSlug/experiences/:experienceSlug", ProfileExperienceService_1.deleteProfileExperience);
+module.exports = router;

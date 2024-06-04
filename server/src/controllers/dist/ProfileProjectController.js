@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var ProfileProjectService_1 = require("../services/ProfileProjectService");
+var router = express_1["default"].Router();
+router.get("/:profileSlug/projects", ProfileProjectService_1.findProfileProjects);
+router.get("/:profileSlug/projects/:projectSlug", ProfileProjectService_1.findProfileProject);
+router.post("/:profileSlug/projects", ProfileProjectService_1.createProfileProject);
+router.put("/:profileSlug/projects/:projectSlug", ProfileProjectService_1.updateProfileProject);
+router["delete"]("/:profileSlug/projects/:projectSlug", ProfileProjectService_1.deleteProfileProject);
+module.exports = router;

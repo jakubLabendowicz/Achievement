@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var ProfileSkillService_1 = require("../services/ProfileSkillService");
+var router = express_1["default"].Router();
+router.get("/:profileSlug/skills", ProfileSkillService_1.findProfileSkills);
+router.get("/:profileSlug/skills/:skillSlug", ProfileSkillService_1.findProfileSkill);
+router.post("/:profileSlug/skills", ProfileSkillService_1.createProfileSkill);
+router.put("/:profileSlug/skills/:skillSlug", ProfileSkillService_1.updateProfileSkill);
+router["delete"]("/:profileSlug/skills/:skillSlug", ProfileSkillService_1.deleteProfileSkill);
+module.exports = router;

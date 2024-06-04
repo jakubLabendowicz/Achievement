@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var ProfileEducationService_1 = require("../services/ProfileEducationService");
+var router = express_1["default"].Router();
+router.get("/:profileSlug/educations", ProfileEducationService_1.findProfileEducations);
+router.get("/:profileSlug/educations/:educationSlug", ProfileEducationService_1.findProfileEducation);
+router.post("/:profileSlug/educations", ProfileEducationService_1.createProfileEducation);
+router.put("/:profileSlug/educations/:educationSlug", ProfileEducationService_1.updateProfileEducation);
+router["delete"]("/:profileSlug/educations/:educationSlug", ProfileEducationService_1.deleteProfileEducation);
+module.exports = router;

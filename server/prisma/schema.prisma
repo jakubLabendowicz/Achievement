@@ -1,0 +1,145 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["mongodb"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type Link {
+  title         String
+  url           String
+  icon       String
+}
+
+type Article {
+  title         String
+  subtitle      String?
+  content       String
+  color         String?
+  image         String
+  links         Link[]
+}
+
+model Profile {
+  //metadata
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  //data
+  slug          String    @unique
+  logo          String
+  name          String
+  article       Article
+  //relations
+  skills        ProfileSkill[]
+  experiences   ProfileExperience[]
+  educations    ProfileEducation[]
+  certifications ProfileCertificate[]
+  projects      ProfileProject[]
+  posts         ProfilePost[]
+}
+
+model ProfileSkill {
+  //metadata
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  //data
+  slug          String    @unique
+  name          String
+  article       Article
+  //relations
+  profile       Profile   @relation(fields: [profileId], references: [id])
+  profileId     String    @db.ObjectId
+  // projects      ProfileProject[] @relation(fields: [projectsIds], references: [id])
+  // projectsIds   String[]  @db.ObjectId
+}
+
+model ProfileExperience {
+  //metadata
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  //data
+  slug          String    @unique
+  name          String
+  startDate     DateTime
+  endDate       DateTime
+  article       Article
+  //relations
+  profile       Profile   @relation(fields: [profileId], references: [id])
+  profileId     String    @db.ObjectId
+}
+
+model ProfileEducation {
+  //metadata
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  //data
+  slug          String    @unique
+  name          String
+  startDate     DateTime
+  endDate       DateTime
+  article       Article
+  //relations
+  profile       Profile   @relation(fields: [profileId], references: [id])
+  profileId     String    @db.ObjectId
+}
+
+model ProfileCertificate {
+  //metadata
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  //data
+  slug          String    @unique
+  name          String
+  startDate     DateTime
+  endDate       DateTime
+  article       Article
+  //relations
+  profile       Profile   @relation(fields: [profileId], references: [id])
+  profileId     String    @db.ObjectId
+}
+
+model ProfileProject {
+  //metadata
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  //data
+  slug          String    @unique
+  name          String
+  startDate     DateTime
+  endDate       DateTime
+  article       Article
+  //relations
+  profile       Profile   @relation(fields: [profileId], references: [id])
+  profileId     String    @db.ObjectId
+  // skills        ProfileSkill[]   @relation(fields: [skillsIds], references: [id])
+  // skillsIds     String[]  @db.ObjectId
+}
+
+model ProfilePost {
+  //metadata
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  //data
+  slug          String    @unique
+  name          String
+  article       Article
+  //relations
+  profile       Profile   @relation(fields: [profileId], references: [id])
+  profileId     String    @db.ObjectId
+}

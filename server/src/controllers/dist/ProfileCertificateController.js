@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var ProfileCertificateService_1 = require("../services/ProfileCertificateService");
+var router = express_1["default"].Router();
+router.get("/:profileSlug/certificates", ProfileCertificateService_1.findProfileCertificates);
+router.get("/:profileSlug/certificates/:certificateSlug", ProfileCertificateService_1.findProfileCertificate);
+router.post("/:profileSlug/certificates", ProfileCertificateService_1.createProfileCertificate);
+router.put("/:profileSlug/certificates/:certificateSlug", ProfileCertificateService_1.updateProfileCertificate);
+router["delete"]("/:profileSlug/certificates/:certificateSlug", ProfileCertificateService_1.deleteProfileCertificate);
+module.exports = router;
